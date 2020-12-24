@@ -13,6 +13,7 @@ interface CreateTransactionDTO {
 }
 
 class TransactionsRepository {
+
   private transactions: Transaction[];
 
   constructor() {
@@ -24,14 +25,14 @@ class TransactionsRepository {
   }
 
   public getBalance(): Balance {
-    const {income, outcome} = this.transactions.reduce((accumulator:Balance, transaction: Transaction) => {
-      switch ( transaction.type) {
+    const { income, outcome } = this.transactions.reduce((accumulator: Balance, transaction: Transaction) => {
+      switch (transaction.type) {
         case 'income':
-        accumulator.income += transaction.value;
-        break;
+          accumulator.income += transaction.value;
+          break;
         case 'outcome':
-        accumulator.outcome += transaction.value;
-        break;
+          accumulator.outcome += transaction.value;
+          break;
         default:
           break;
       }
@@ -46,13 +47,13 @@ class TransactionsRepository {
 
     const total = income - outcome;
 
-    return {income, outcome, total};
+    return { income, outcome, total };
 
 
   }
 
-  public create({title,type,value}: CreateTransactionDTO): Transaction {
-    const transaction = new Transaction({title,type,value});
+  public create({ title, type, value }: CreateTransactionDTO): Transaction {
+    const transaction = new Transaction({ title, type, value });
 
     this.transactions.push(transaction);
 
